@@ -1,0 +1,94 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "PaintCalc",
+    "description": "Paint Calculator API",
+    "version": "1.0.0",
+    "contact": {
+      "email": "thiagosgdev@gmail.com"
+    }
+  },
+  "paths": {
+    "/calculate-paint": {
+      "post": {
+        "tags": ["Paint"],
+        "summary": "Calculate the amount of paint cans needed.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "walls": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "height": {
+                          "type": "number",
+                          "description": "Wall height",
+                          "required": true
+                        },
+                        "length": {
+                          "type": "number",
+                          "description": "Wall lenght",
+                          "required": true
+                        },
+                        "doors": {
+                          "type": "number",
+                          "description": "Total of doors in the wall",
+                          "required": true
+                        },
+                        "windows": {
+                          "type": "number",
+                          "description": "Total of windows in the wall",
+                          "required": true
+                        }
+                      }
+                    }
+                  }
+                },
+                "example": {
+                  "walls": [
+                    {
+                      "height": 5,
+                      "length": 5,
+                      "doors": 1,
+                      "windows": 2
+                    },
+                    {
+                      "height": 5,
+                      "length": 8,
+                      "doors": 2,
+                      "windows": 0
+                    },
+                    {
+                      "height": 5,
+                      "length": 7,
+                      "doors": 2,
+                      "windows": 2
+                    },
+                    {
+                      "height": 5,
+                      "length": 9,
+                      "doors": 1,
+                      "windows": 0
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Object with the amount of cans for each size needed"
+          },
+          "400": {
+            "description": "Missing parameter on the request. Or calculation was not complete because one of the different calculation rules wasn't attended."
+          }
+        }
+      }
+    }
+  }
+}
